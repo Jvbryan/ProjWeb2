@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>The Cotton Man | Organic Cotton, Vaping Wicks and Hemp Plant Products</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="Proj2.css" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1 class="imglogo"><img src="firstlogo.png" alt="Cottonman"></h1>
+                <div class="login">
+                    <input class="email" type="email" id="email" placeholder="Email"/>
+                    <span class="erroemail"></span>
+                    <!--criar um span e chamar depois, nos dois casos-->
+                    <input class="senha" type="senha" id="senha" placeholder="Password"/>
+                    <span class="errosenha"></span>
+                    <button class="btlogar">Login</button>
+                </div>
+                <div class="boxdeslog">
+                    <button class="btdeslog">Sair</button>
+                </div>
+                <nav>
+                <div class="menu">
+                    <div class="bar">
+                        <div class="caixa">
+                            HOME                        
+                        </div>           
+                        <div class="caixa">
+                            RAW COTTON &#9662;
+                            <div class="cxexterna"> 
+                                <div class="submenu">
+                                    <div class="branca"> 
+                                        COTTON BOLLS
+                                    </div>
+                                    <div class="branca">
+                                        COTTON BURS
+                                    </div>
+                                    <div class="branca">
+                                        DRIED COTTON PLANTS
+                                    </div>                                        
+                                    <div class="branca">
+                                        LIVE COTTON PLANTS
+                                    </div>
+                                    <div class="branca">
+                                        COTTON SEED
+                                    </div>
+                                    <div class="branca">
+                                        COTTON FIBER
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="caixa">
+                            PREMIUM COTTON FIBER &#9662;
+                            <div class="cxexterna"> 
+                                <div class="submenu">
+                                    <div class="branca"> 
+                                        MAVATON'S X
+                                    </div>
+                                    <div class="branca">
+                                        UPLAND RESERVE
+                                    </div>
+                                    <div class="branca">
+                                        ORGANIC UPLAND SLIVER
+                                    </div>                                        
+                                    <div class="branca">
+                                        SLIVER BLEND
+                                    </div>
+                                    <div class="branca">
+                                        FACIAL PAD
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="caixa">
+                            COTTON FARM &#9662;
+                            <div class="cxexterna"> 
+                                <div class="submenu">
+                                    <div class="branca"> 
+                                        COTTON BALES
+                                    </div>
+                                    <div class="branca">
+                                        COTTON JEWELRY
+                                    </div>
+                                    <div class="branca">
+                                        BEAN & PEA SHELLER 
+                                    </div>                                        
+                                    <div class="branca">
+                                        COTTON HISTORY &#9662;                                
+                                    </div>                                                                         
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="caixa">
+                            BLOG
+                        </div>
+
+                        <div class="caixa">
+                            CONTACT US
+                        </div>
+                   
+                        <div class="caixa">
+                            CART
+                        </div>
+
+                    </div>
+                </div>
+                </nav>
+            </header>
+            <div class="cartmenu">
+                 <div class="cart"> View Cart 
+                    <div class="carrinho"></div>    
+                </div>
+                <div class="menumedia"></div>
+            </div>
+            <div class="main">
+                <div class="fotofundotop">
+                    <h2 class="textopainel"> COTTONMAN </h2>
+                    <h3 class="texto2painel"> FROM OUR FARM TO YOUR DOOR </h3>
+                    <div class="boxpesquisa">                       
+                            <form style ="text-align: center;" action=" " method="post">
+                                <label for="busca"></label>
+                                <input class="pesqjogo" type="search" name="busca" placeholder="Search - Ex: shooter, strategy, moba, racing..." value="">
+                            </form>                       
+                        <div class="btpesquisa">
+                            <button class="btpesq" id="btbusca" type="submit"></button>                              
+                        </div>
+                    </div>
+                </div> 
+                <div class="resultBusca"></div>
+                <div class="txtnossahistoria">    
+                    <h4>
+                        <strong> OUR STORY </strong>
+                    </h4>  
+                    <p>
+                        <span> I'm Fahey Byrum III, 
+                            or Butch. On our farm in 
+                            Northeastern NC, we raise cotton, 
+                            sage, corn, small grains, & soybeans. 
+                            Through this web site we offer cotton, 
+                            cotton plants, cotton bolls, Cotton 
+                            Jewelry, & lots of other farm related 
+                            products for the asking.   
+                            We specialize in supplying these 
+                            products at reasonable prices with 
+                            personalized service. 
+                        </span>
+                    </p>             
+                </div>
+            </div>
+           
+        </div>
+        <script type="text/javascript" charset="utf-8">
+        logado();
+        document.querySelector(".btlogar").addEventListener("click",() =>{
+            var email = document.querySelector('#email').value,
+                senha = document.querySelector('#senha').value,
+                pack;
+            if(email.length < 3){
+                pack = document.querySelector(".erroemail");
+                pack.innerHTML = "Email inválido! - Muito curto!";
+                //console.log(email);
+                return;
+            }
+            if (senha.length < 3) {
+                pack = document.querySelector(".errosenha");
+                pack.innerHTML = "Senha inválida! - Muito curta";
+                return;
+            }
+            if (sessionStorage.getItem("email") == 1) return;
+
+            axios.post("https://reqres.in/api/login", {email: email,password: senha,})
+            .then(function (res) {
+                if (res.status == 200) {  
+                    busca();
+                }
+            })
+            .catch(function (error) {
+                pack = document.querySelector(".erroemail");
+                pack.innerHTML = "Email invalido! - Não existe";
+                pack = document.querySelector(".errosenha");
+                pack.innerHTML = "Senha incorreta!";
+            });
+        });
+        
+        function logado() {
+            if (sessionStorage.getItem("login") == 1) {
+                var verif = document.querySelector(".login");
+                verif.className = ctr.className.replace("login", "loginocult");
+                verif = document.querySelector(".boxdeslog");
+                verif.className = ctr.className.replace("boxdeslog", "logado");
+                verif = document.querySelector(".boxdeslog");
+                verif.innerHTML = "";
+                verif.innerHTML = "Bem vindo(a), " + sessionStorage.getItem("email");
+                busca();
+            }
+        }
+
+        /*//NÃO FUNCIONA
+        function Guardalogin(email){
+            var save = document.querySelector(".login");
+            save.className = save.className.replace("login","loginocult");
+            save = document.querySelector(".boxdeslog");
+            save.className = save.className.replace("boxdeslog","logado");
+            save.innerHTML = "";
+            save.innerHTML = "Bem vindo(a), " + email;
+            sessionStorage.setItem("login",1);
+            sessionStorage.setItem("email",email);
+        }
+        */
+       
+        /*//NÃO FUNCIONA
+        function deslogar() {
+            sessionStorage.clear();
+            var reset = document.querySelector(".boxdeslog");
+            reset.className = reset.className.replace("boxdeslog", "login");
+            reset = document.querySelector(".logado");
+            reset.className = ctr.className.replace("logado", "logadoocult");
+            reset = document.querySelector(".boxdeslog");
+            reset.innerHTML = "";
+            reset = document.querySelector(".resultBusca");
+            reset.innerHTML = "";
+            reset = document.querySelector("#email");
+            reset.value = "";
+            reset = document.querySelector("#password");
+            reset.value = "";
+            reset = document.querySelector(".avisoEmail");
+            reset.innerHTML = "";
+            reset = document.querySelector(".avisoPassword");   
+            reset.innerHTML = "";
+            console.log(deslogar);
+        }
+        //NÃO FUNCIONA
+        document.querySelector(".btdeslog").addEventListener("click", () => {
+            deslogar();
+        });*/
+
+        //FAZER PARA QUANDO TIVER LOGADO NÃO APARECER -IF- MAYBE?
+      // if(res.status !== 200){
+        document
+        .querySelector(".btpesquisa","btpesq")
+        .addEventListener("mouseover", function () {
+            
+
+            if (this.querySelector(".btpesquisa_holder")) return;
+            var div = document.createElement("div"),
+            texto = "Faça login para habilitar a pesquisa 🔎";
+            div.className = "btpesquisa_holder";
+            div.innerHTML = texto;
+            this.appendChild(div);
+            
+        });
+        document
+        .querySelector(".btpesquisa","btpesq")
+        .addEventListener("mouseout", function () {
+            this.removeChild(this.querySelector(".btpesquisa_holder"));
+        });
+    // }
+
+
+        function busca(){          
+        document.querySelector(".btpesquisa").addEventListener("click", function () {
+            var categoria = document.querySelector('.pesqjogo').value,
+                container = document.querySelector(".resultBusca");
+                container.innerHTML = "";
+            const options = {
+                method: 'GET',
+                url: ('https://free-to-play-games-database.p.rapidapi.com/api/games'),
+                params: {category: categoria},
+                headers: {
+                    'X-RapidAPI-Key': '5ed8b0f2dfmsh3a712b7ac2e336bp1f28b2jsn4880374cdcbc',
+                    'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
+                },
+            };
+            axios
+            .request(options)
+            .then(function (res) {
+                var docs = res.data,
+                    container = document.querySelector(".resultBusca");
+                container.innerHTML = "";
+                //console.log(res);
+                for(let i = 0; i <docs.length  && i < 10; i++){
+                    var titulo = document.createElement("h2"),
+                        descricao = document.createElement("p"),
+                        imgjogo = document.createElement("img");
+                    titulo.classList.add("busca");
+                    descricao.classList.add("descricao");
+                    imgjogo.classList.add("imgjogo");
+                    titulo.innerHTML = docs[i].title;
+                    descricao.innerHTML = docs[i].short_description;
+                    imgjogo.src = docs[i].thumbnail;
+                    container.appendChild(titulo); 
+                    container.appendChild(imgjogo);
+                    container.appendChild(descricao);
+                    //console.log(res);
+                }        
+            })           
+            .catch(function (error) {
+                console.error(error);
+            });
+        });
+        }
+        </script>
+    </body>
+</html>
